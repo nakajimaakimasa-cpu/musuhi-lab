@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fumiaki Asami｜Musuhi Lab オンライン名刺</title>
+<meta name="description" content="Musuhi Lab（札幌）Fumiaki Asami — Instagram運用代行・伴走サポートのオンライン名刺">
+<meta property="og:title" content="Fumiaki Asami｜Musuhi Lab">
+<meta property="og:description" content="Instagram運用代行・伴走サポート（札幌）">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+</head>
+<body>
+<style>
+  :root {
+    --bg: #FBF8F6;
+    --card: #FFFFFF;
+    --ink: #2A2130;
+    --muted: #7A6F80;
+    --line: #EDE6EA;
+    --chip-bg: #F7F0F4;
+    --btn-ghost: #FFFFFF;
+    --shadow: 0 24px 60px -24px rgba(90, 40, 110, .25), 0 4px 16px -6px rgba(90, 40, 110, .12);
+    --ig: linear-gradient(45deg, #FEDA75 0%, #F58529 26%, #DD2A7B 52%, #8134AF 76%, #515BD4 100%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #151018;
+      --card: #201826;
+      --ink: #F4EEF5;
+      --muted: #A99DB0;
+      --line: #372B3E;
+      --chip-bg: #2B2132;
+      --btn-ghost: #261D2D;
+      --shadow: 0 24px 60px -24px rgba(0, 0, 0, .6), 0 4px 16px -6px rgba(0, 0, 0, .4);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #FBF8F6;
+    --card: #FFFFFF;
+    --ink: #2A2130;
+    --muted: #7A6F80;
+    --line: #EDE6EA;
+    --chip-bg: #F7F0F4;
+    --btn-ghost: #FFFFFF;
+    --shadow: 0 24px 60px -24px rgba(90, 40, 110, .25), 0 4px 16px -6px rgba(90, 40, 110, .12);
+  }
+  :root[data-theme="dark"] {
+    --bg: #151018;
+    --card: #201826;
+    --ink: #F4EEF5;
+    --muted: #A99DB0;
+    --line: #372B3E;
+    --chip-bg: #2B2132;
+    --btn-ghost: #261D2D;
+    --shadow: 0 24px 60px -24px rgba(0, 0, 0, .6), 0 4px 16px -6px rgba(0, 0, 0, .4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  .stage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .glow {
+    position: absolute;
+    width: 560px; height: 560px;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: .18;
+    background: conic-gradient(from 30deg, #FEDA75, #F58529, #DD2A7B, #8134AF, #515BD4, #FEDA75);
+    pointer-events: none;
+  }
+  .glow.a { top: -220px; left: -160px; }
+  .glow.b { bottom: -260px; right: -180px; opacity: .13; }
+
+  .card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    padding: 0 28px 28px;
+    animation: rise .6s cubic-bezier(.2, .7, .2, 1) both;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .card { animation: none; }
+  }
+
+  .topline {
+    height: 5px;
+    background: var(--ig);
+    border-radius: 0 0 6px 6px;
+    margin: 0 -28px 0;
+  }
+
+  .masthead {
+    text-align: center;
+    margin-top: 24px;
+    font-family: "Avenir Next", "Futura", "Helvetica Neue", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .42em;
+    padding-left: .42em;
+    color: var(--muted);
+  }
+
+  .id {
+    text-align: center;
+    margin-top: 26px;
+  }
+  .kana {
+    font-size: 11px;
+    letter-spacing: .34em;
+    color: var(--muted);
+    margin: 0 0 6px;
+    padding-left: .34em;
+  }
+  h1 {
+    font-family: "Avenir Next", "Futura", "Helvetica Neue", sans-serif;
+    font-size: 27px;
+    font-weight: 600;
+    letter-spacing: .02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .role {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    background: var(--ig);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .handle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .handle a {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .handle a:hover { color: #DD2A7B; }
+  .handle svg { display: block; }
+
+  .bio {
+    margin: 20px auto 0;
+    max-width: 32em;
+    font-size: 13.5px;
+    line-height: 2;
+    color: var(--ink);
+    text-align: center;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    padding: 0;
+    list-style: none;
+  }
+  .chips li {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 999px;
+    background: var(--chip-bg);
+    border: 1px solid var(--line);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 26px;
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 13px 16px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    background: var(--btn-ghost);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:focus-visible {
+    outline: 3px solid #DD2A7B;
+    outline-offset: 2px;
+  }
+  .btn.primary {
+    background: var(--ig);
+    border: none;
+    color: #fff;
+    box-shadow: 0 10px 24px -10px rgba(221, 42, 123, .55);
+  }
+  .btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .qr-sec {
+    margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .qr-card {
+    background: #FFFFFF;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 12px;
+    box-shadow: 0 10px 28px -14px rgba(90, 40, 110, .3);
+  }
+  .qr-card img {
+    width: 132px;
+    height: 132px;
+    display: block;
+  }
+  .qr-note {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .04em;
+    color: var(--muted);
+  }
+  .qr-dl {
+    font-size: 12px;
+    font-weight: 700;
+    color: #DD2A7B;
+    text-decoration: none;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 16px;
+    background: var(--btn-ghost);
+  }
+  .qr-dl:focus-visible {
+    outline: 3px solid #DD2A7B;
+    outline-offset: 2px;
+  }
+
+  .meta {
+    margin-top: 24px;
+    border-top: 1px solid var(--line);
+    padding-top: 16px;
+    display: grid;
+    gap: 8px;
+    font-size: 12.5px;
+  }
+  .meta .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .meta dt { color: var(--muted); font-weight: 600; }
+  .meta dd { margin: 0; text-align: right; }
+  .meta a { color: inherit; text-decoration: none; }
+
+  .foot {
+    text-align: center;
+    margin-top: 22px;
+    font-family: "Avenir Next", "Futura", "Helvetica Neue", sans-serif;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: .28em;
+    padding-left: .28em;
+  }
+</style>
+
+<div class="stage">
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+
+  <main class="card">
+    <div class="topline"></div>
+
+    <p class="masthead">MUSUHI LAB</p>
+
+    <header class="id">
+      <p class="kana">アサミ フミアキ</p>
+      <h1>Fumiaki Asami</h1>
+      <span class="role">Instagram 運用代行・伴走サポート</span>
+      <p class="handle">
+        <a href="https://www.instagram.com/iiis_poooooh/" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.4"/>
+            <circle cx="17.6" cy="6.4" r="0.5" fill="currentColor"/>
+          </svg>
+          @iiis_poooooh
+        </a>
+      </p>
+    </header>
+
+    <p class="bio">
+      企画・撮影ディレクションから分析改善まで、<br>
+      現場の魅力を「伝わる発信」に変えて、<br>
+      採用と受注につながるアカウントを育てます。
+    </p>
+
+    <ul class="chips">
+      <li>アカウント設計</li>
+      <li>リール企画・撮影</li>
+      <li>投稿運用</li>
+      <li>分析レポート</li>
+    </ul>
+
+    <div class="actions">
+      <a class="btn primary" href="https://www.instagram.com/iiis_poooooh/" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+          <circle cx="12" cy="12" r="4.4"/>
+          <circle cx="17.6" cy="6.4" r="0.5" fill="currentColor"/>
+        </svg>
+        Instagramを見る
+      </a>
+      <div class="btn-row">
+        <a class="btn" href="tel:09066957718">📞 電話する</a>
+        <a class="btn" href="mailto:asamif15@gmail.com">✉ メール</a>
+      </div>
+      <a class="btn" id="save-vcard" href="#" download="fumiaki-asami-musuhi-lab.vcf">＋ 連絡先に保存</a>
+    </div>
+
+    <div class="qr-sec">
+      <div class="qr-card">
+        <img id="qr-img" alt="Instagram QRコード（@iiis_poooooh）" src="data:image/png;base64,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">
+      </div>
+      <p class="qr-note">スキャンでInstagramへ</p>
+      <a class="qr-dl" id="qr-dl" href="#" download="musuhi-lab_instagram_qr.png">⤓ QRコードを保存</a>
+    </div>
+
+    <dl class="meta">
+      <div class="row"><dt>屋号</dt><dd>Musuhi Lab</dd></div>
+      <div class="row"><dt>拠点</dt><dd>札幌市</dd></div>
+      <div class="row"><dt>電話</dt><dd><a href="tel:09066957718">090-6695-7718</a></dd></div>
+      <div class="row"><dt>メール</dt><dd><a href="mailto:asamif15@gmail.com">asamif15@gmail.com</a></dd></div>
+    </dl>
+
+    <p class="foot">MUSUHI LAB ・ SAPPORO</p>
+  </main>
+</div>
+
+<script>
+  (function () {
+    var vcard = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      "N:Asami;Fumiaki;;;",
+      "FN:Fumiaki Asami",
+      "ORG:Musuhi Lab",
+      "TITLE:Instagram運用代行",
+      "TEL;TYPE=CELL:090-6695-7718",
+      "EMAIL:asamif15@gmail.com",
+      "URL:https://www.instagram.com/iiis_poooooh/",
+      "ADR;TYPE=WORK:;;;札幌市;;;Japan",
+      "END:VCARD"
+    ].join("\n");
+    var link = document.getElementById("save-vcard");
+    link.href = "data:text/vcard;charset=utf-8," + encodeURIComponent(vcard);
+    document.getElementById("qr-dl").href = document.getElementById("qr-img").src;
+  })();
+</script>
+
+</body>
+</html>
