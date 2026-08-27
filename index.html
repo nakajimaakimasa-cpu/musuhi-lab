@@ -164,40 +164,6 @@
     background:var(--ig);
   }
 
-  /* ---------- works ---------- */
-  .works{ display:flex; flex-direction:column; gap:30px; }
-  .work{
-    display:block; text-decoration:none; color:var(--ink);
-  }
-  .work .shot{
-    display:block; width:100%; height:auto;
-    border:1px solid var(--hair);
-    transition:opacity .25s ease;
-  }
-  .work:hover .shot{ opacity:.85; }
-  .work .work-head{
-    margin-top:12px;
-    display:flex; align-items:baseline; justify-content:space-between; gap:12px;
-  }
-  .work .work-title{
-    font-size:14px; font-weight:600; letter-spacing:.05em;
-  }
-  .work .work-title::after{
-    content:"→"; font-weight:400; color:#a9a5a0;
-    margin-left:8px; font-size:13px;
-  }
-  .work .work-tag{
-    flex:none;
-    font-size:10px; letter-spacing:.18em; color:var(--sub);
-    text-transform:uppercase;
-  }
-  .work .work-note{
-    margin-top:6px;
-    font-family:var(--serif);
-    font-size:12.5px; line-height:1.9; letter-spacing:.05em;
-    color:var(--sub);
-  }
-
   /* ---------- actions ---------- */
   .actions{ display:flex; flex-direction:column; gap:10px; }
   .btn{
@@ -300,7 +266,7 @@
   .d1{ animation-delay:.05s; } .d2{ animation-delay:.15s; }
   .d3{ animation-delay:.25s; } .d4{ animation-delay:.35s; }
   .d5{ animation-delay:.45s; } .d6{ animation-delay:.55s; }
-  .d7{ animation-delay:.65s; } .d8{ animation-delay:.75s; }
+  .d7{ animation-delay:.65s; }
   @media (prefers-reduced-motion: reduce){
     *,*::before,*::after{ animation:none !important; transition:none !important; }
   }
@@ -350,44 +316,14 @@
     </ul>
   </section>
 
-  <section class="section fade d5">
-    <h2 class="label"><span class="num">03</span><span class="en">Works</span><span class="ja">制作実績</span></h2>
-    <div class="works">
-      <a class="work" href="https://cerulean-hummingbird-59263c.netlify.app/" target="_blank" rel="noopener">
-        <img class="shot" src="assets/work_komorebi.jpg" alt="KOMOREBI COFFEE & DINING のサイト画面" width="1200" height="750" loading="lazy">
-        <div class="work-head">
-          <span class="work-title">KOMOREBI COFFEE &amp; DINING</span>
-          <span class="work-tag">店舗サイト</span>
-        </div>
-        <p class="work-note">時間帯別の導線と貸切・宴会プランで、来店と高単価の相談につなげる設計。</p>
-      </a>
-      <a class="work" href="https://fdaigakuprogress.com/" target="_blank" rel="noopener">
-        <img class="shot" src="assets/work_perfume.jpg" alt="モテ香水ラボのサイト画面" width="1200" height="750" loading="lazy">
-        <div class="work-head">
-          <span class="work-title">モテ香水ラボ</span>
-          <span class="work-tag">メディア</span>
-        </div>
-        <p class="work-note">記事100本規模で実運用中のオウンドメディア。公開から運用まで一貫して担当。</p>
-      </a>
-      <a class="work" href="https://ferrari-488-site.vercel.app/" target="_blank" rel="noopener">
-        <img class="shot" src="assets/work_ferrari.jpg" alt="Ferrari 488 特設サイトの画面" width="1200" height="750" loading="lazy">
-        <div class="work-head">
-          <span class="work-title">Ferrari 488 特設サイト</span>
-          <span class="work-tag">ブランドLP</span>
-        </div>
-        <p class="work-note">大きな写真とアニメーションで世界観を伝える、表現力の上限を示すデモ。</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="section actions fade d6">
+  <section class="section actions fade d5">
     <a class="btn btn-primary" href="https://www.instagram.com/iiis_poooooh/" target="_blank" rel="noopener"><span>Instagramを見る</span></a>
     <a class="btn btn-line" href="mailto:asamif15@gmail.com"><span>✉ メール</span></a>
     <a class="btn btn-line" id="save-vcard" href="#" download="fumiaki-asami-musuhi-lab.vcf"><span>＋ 連絡先に保存</span></a>
   </section>
 
-  <section class="section fade d7">
-    <h2 class="label"><span class="num">04</span><span class="en">QR Code</span><span class="ja">Instagram</span></h2>
+  <section class="section fade d6">
+    <h2 class="label"><span class="num">03</span><span class="en">QR Code</span><span class="ja">Instagram</span></h2>
     <div class="qr-box">
       <img id="qr-img" src="data:image/png;base64,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" alt="Instagram QRコード" width="130" height="130">
       <div class="qr-text">
@@ -397,8 +333,8 @@
     </div>
   </section>
 
-  <section class="section fade d8">
-    <h2 class="label"><span class="num">05</span><span class="en">Information</span><span class="ja">ご案内</span></h2>
+  <section class="section fade d7">
+    <h2 class="label"><span class="num">04</span><span class="en">Information</span><span class="ja">ご案内</span></h2>
     <dl class="info">
       <div class="row"><dt>屋号</dt><dd>Musuhi Lab</dd></div>
       <div class="row"><dt>拠点</dt><dd>札幌市</dd></div>
@@ -407,7 +343,7 @@
     </dl>
   </section>
 
-  <footer class="footer fade d8">
+  <footer class="footer fade d7">
     <img class="footer-logo" src="assets/logo.png" alt="" aria-hidden="true" width="720" height="509" loading="lazy">
     <span class="rule-grad-full" aria-hidden="true"></span>
     <p>MUSUHI LAB ・ SAPPORO</p>
