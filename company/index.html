@@ -492,7 +492,12 @@ svg{display:block}
 @media (max-width:900px){.scroll-hint{display:none}}
 
 /* ===== ヒーロー v3：写真を全面に敷き、文字を白に。ゆっくりズームし続ける ===== */
-.hero{padding:100px 0 112px;min-height:640px;display:flex;align-items:center;color:#fff}
+.hero{padding:110px 0 120px;min-height:640px;color:#fff}
+/* flex にするとコンテナが min-width:auto で縮まず、スマホで横にはみ出す */
+/* グリッド項目は中身より縮めるようにし、1字ずつ分割した見出しはフレックスで必ず折り返す */
+.hero-grid{min-width:0}
+.hero-copy,.hero-form-wrap{min-width:0}
+.hero h1{display:flex;flex-wrap:wrap;overflow-wrap:anywhere}
 .hero-bg{width:100%;right:auto;left:0}
 .hero-bg img{opacity:1;object-position:center 45%;transform-origin:center;animation:musuhi-kenburns 28s ease-in-out infinite alternate;will-change:transform}
 .hero-bg::after{background:linear-gradient(90deg,rgba(20,32,26,.84) 0%,rgba(20,32,26,.66) 42%,rgba(20,32,26,.28) 100%)}
