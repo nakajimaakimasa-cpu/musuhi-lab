@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<title>むすひ ｜ Instagram運用代行・現場撮影（札幌）</title>
+<title>むすひ ｜ Instagram運用代行・現場撮影（旭川）</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&amp;display=swap">
 <style>
@@ -431,24 +431,65 @@ svg{display:block}
 @media (max-width:900px){.tier-grid,.ms-list{grid-template-columns:1fr}}
 
 /* ===== 動き ===== */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.2,.6,.2,1),transform .75s cubic-bezier(.2,.6,.2,1)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,.84,.44,1),transform .8s cubic-bezier(.16,.84,.44,1)}
 .reveal.is-in{opacity:1;transform:none}
+
+/* 見出しの下線が伸びる */
+.section-head .label{position:relative;display:inline-block}
+.section-head .label::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--primary);transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.16,.84,.44,1) .15s}
+.section-head.is-in .label::after{transform:scaleX(1)}
+
+/* ヒーローの入場 */
+.hero-anim{opacity:0;transform:translateY(26px);transition:opacity .85s cubic-bezier(.16,.84,.44,1),transform .85s cubic-bezier(.16,.84,.44,1)}
+.hero-ready .hero-anim{opacity:1;transform:none}
+.hero-ready .hero-anim:nth-child(2){transition-delay:.08s}
+.hero-ready .hero-anim:nth-child(3){transition-delay:.16s}
+.hero-ready .hero-anim:nth-child(4){transition-delay:.24s}
+.hero-ready .hero-anim:nth-child(5){transition-delay:.32s}
+.hero-form-wrap{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.16,.84,.44,1) .3s,transform .9s cubic-bezier(.16,.84,.44,1) .3s}
+.hero-ready .hero-form-wrap{opacity:1;transform:none}
+
+/* ヘッダー・進捗バー */
 .site-header{transition:box-shadow .25s ease}
-.site-header.is-scrolled{box-shadow:0 2px 18px rgba(20,32,26,.09)}
+.site-header.is-scrolled{box-shadow:0 2px 18px rgba(20,32,26,.10)}
 .scroll-progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--primary);z-index:100;transition:width .12s linear;pointer-events:none}
-.plan,.sol-card,.field-card,.spot-card,.reason,.tier,.ms-item{transition:transform .28s ease,box-shadow .28s ease}
-.plan:hover,.sol-card:hover,.field-card:hover,.spot-card:hover,.tier:hover,.ms-item:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(20,32,26,.10)}
+
+/* カードの浮き上がり */
+.plan,.sol-card,.field-card,.spot-card,.reason,.tier,.ms-item{transition:transform .3s ease,box-shadow .3s ease}
+.plan:hover,.sol-card:hover,.spot-card:hover,.tier:hover,.ms-item:hover{transform:translateY(-6px);box-shadow:0 14px 36px rgba(20,32,26,.12)}
 .btn:hover .arrow,.btn:focus-visible .arrow{transform:translateX(5px)}
 
-/* 業種の自動スライダー（PCのみ。JSで組み立てる） */
+/* 写真がゆっくり寄る */
+.reason-photo img,.field-photo img{transition:transform 1.1s cubic-bezier(.16,.84,.44,1)}
+.reason:hover .reason-photo img,.field-card:hover .field-photo img{transform:scale(1.06)}
+
+/* 数字のカウントアップ */
+.count{font-variant-numeric:tabular-nums}
+
+/* 業種の自動スライダー */
 .field-marquee{overflow:hidden;position:relative;margin:0 -20px;padding:6px 20px}
-.field-marquee::before,.field-marquee::after{content:"";position:absolute;top:0;bottom:0;width:72px;z-index:2;pointer-events:none}
-.field-marquee::before{left:0;background:linear-gradient(90deg,var(--gray),rgba(241,243,243,0))}
-.field-marquee::after{right:0;background:linear-gradient(270deg,var(--gray),rgba(241,243,243,0))}
-.field-marquee .field-row{display:flex;grid-template-columns:none;flex-wrap:nowrap;width:max-content;gap:16px;animation:musuhi-marquee 64s linear infinite}
+.field-marquee::before,.field-marquee::after{content:"";position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.field-marquee::before{left:0;background:linear-gradient(90deg,var(--gray) 20%,rgba(241,243,243,0))}
+.field-marquee::after{right:0;background:linear-gradient(270deg,var(--gray) 20%,rgba(241,243,243,0))}
+.field-marquee .field-row{display:flex;grid-template-columns:none;flex-wrap:nowrap;width:max-content;gap:16px;animation:musuhi-marquee 72s linear infinite}
 .field-marquee .field-card{flex:0 0 244px}
 .field-marquee:hover .field-row,.field-marquee:focus-within .field-row{animation-play-state:paused}
 @keyframes musuhi-marquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
+
+/* 下部に出る相談バー */
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:90;background:var(--dark);color:#fff;transform:translateY(110%);transition:transform .4s cubic-bezier(.16,.84,.44,1);padding:12px 20px}
+.sticky-cta.is-on{transform:none}
+.sticky-cta-inner{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.sticky-cta p{margin:0;font-size:14px;font-weight:700}
+.sticky-cta small{display:block;font-size:12px;font-weight:400;color:rgba(255,255,255,.72);margin-top:2px}
+.sticky-cta .btn{min-height:44px;white-space:nowrap}
+@media (max-width:700px){.sticky-cta p{font-size:13px}.sticky-cta small{display:none}}
+
+/* スクロールを促す矢印 */
+.scroll-hint{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:10px;letter-spacing:.18em;color:var(--muted)}
+.scroll-hint span{display:block;width:1px;height:34px;background:linear-gradient(180deg,var(--primary),rgba(124,196,146,0));animation:musuhi-drop 1.8s ease-in-out infinite}
+@keyframes musuhi-drop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media (max-width:900px){.scroll-hint{display:none}}
 </style>
 </head>
 <body>
@@ -490,10 +531,10 @@ svg{display:block}
     </div>
     <div class="container hero-grid">
       <div class="hero-copy">
-        <p class="chip">札幌発・道内の現場へ出向くInstagram運用代行</p>
+        <p class="chip">旭川発・道内の現場へ出向くInstagram運用代行</p>
         <h1 id="hero-title">Instagram運用代行・現場撮影</h1>
         <p class="hero-sub">現場の<b>「人」</b>を、選ばれる理由に。</p>
-        <p class="lead">農場・漁港・工場・工事現場。むすひは札幌から現場へ出向き、社長や職人、生産者の顔と言葉でInstagramを育てます。撮影から投稿まで、少人数だから速く・安く・柔軟に。</p>
+        <p class="lead">農場・漁港・工場・工事現場。むすひは旭川から現場へ出向き、社長や職人、生産者の顔と言葉でInstagramを育てます。撮影から投稿まで、少人数だから速く・安く・柔軟に。</p>
         <ul class="fact-badges" aria-label="サービスの事実">
           <li><span class="badge-big">道内どこでも</span><span class="badge-small">現場撮影</span></li>
           <li><span class="badge-big">月<em>4〜12</em>本</span><span class="badge-small">投稿</span></li>
@@ -560,7 +601,7 @@ svg{display:block}
       <div class="section-head">
         <p class="label">Fields</p>
         <h2 id="fields-title">北海道の、こんな現場へ行きます</h2>
-        <p class="section-note">農場から工場まで。札幌を拠点に道内の現場へ同行します。</p>
+        <p class="section-note">農場から工場まで。旭川を拠点に道内の現場へ同行します。</p>
       </div>
       <ul class="field-row">
         <li class="field-card">
@@ -671,7 +712,7 @@ svg{display:block}
       <div class="about-grid">
         <div class="about-copy">
           <p>「むすひ」は日本の古い言葉で、"生み出し、結ぶ力"を意味します。現場にある価値を映像と言葉で生み出し、それを必要とする人と結ぶ——その意味を屋号にしました。</p>
-          <p>札幌を拠点に、北海道の第一次産業と中小企業のInstagramを、撮影から投稿まで一貫して担当します。</p>
+          <p>旭川を拠点に、北海道の第一次産業と中小企業のInstagramを、撮影から投稿まで一貫して担当します。</p>
         </div>
         <figure class="about-photo">
           <img src="img/harbor.jpg" alt="港に並ぶ漁船" width="1200" height="800" loading="lazy">
@@ -778,7 +819,7 @@ svg{display:block}
               <span class="reason-icon" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.5"/></svg></span>
             </div>
             <h3>現場に行って<br>撮る</h3>
-            <p>ネット完結の代行では撮れない、土と潮と汗の質感。札幌から道内の現場へ出向きます。</p>
+            <p>ネット完結の代行では撮れない、土と潮と汗の質感。旭川から道内の現場へ出向きます。</p>
           </div>
         </li>
         <li class="reason">
@@ -1012,7 +1053,7 @@ svg{display:block}
           <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>顔出しなしの設計も可能です。ただし人が出る投稿の方が反応は良い傾向があるので、無理のない範囲でご相談します。</p></div>
         </details>
         <details class="faq-item">
-          <summary><span class="faq-q" aria-hidden="true">Q</span>札幌以外の現場でも来てもらえますか？</summary>
+          <summary><span class="faq-q" aria-hidden="true">Q</span>旭川以外の現場でも来てもらえますか？</summary>
           <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>北海道内は対応します。交通費は実費でお願いしています。</p></div>
         </details>
         <details class="faq-item">
@@ -1054,11 +1095,12 @@ svg{display:block}
           <tbody>
             <tr><th scope="row">屋号</th><td>むすひ</td></tr>
             <tr><th scope="row">代表</th><td>浅見 文晶</td></tr>
-            <tr><th scope="row">所在地</th><td>北海道札幌市</td></tr>
+            <tr><th scope="row">所在地</th><td>北海道旭川市永山7条8丁目7-8</td></tr>
             <tr><th scope="row">事業内容</th><td>Instagram運用代行／現場撮影／ショート動画制作</td></tr>
             <tr><th scope="row">電話</th><td><a href="tel:09066957718">090-6695-7718</a></td></tr>
             <tr><th scope="row">メール</th><td><a href="mailto:asamif15@gmail.com">asamif15@gmail.com</a></td></tr>
             <tr><th scope="row">Instagram</th><td><a href="https://www.instagram.com/iiis_poooooh/" target="_blank" rel="noopener">@iiis_poooooh</a></td></tr>
+                  <tr><th scope="row">ウェブサイト</th><td><a href="https://musuhi.co.jp" target="_blank" rel="noopener">https://musuhi.co.jp</a></td></tr>
           </tbody>
         </table>
       </div>
@@ -1140,7 +1182,7 @@ svg{display:block}
   <div class="container footer-grid">
     <div class="footer-brand">
       <img class="footer-logo" src="img/logo.png" alt="むすひ" width="720" height="509" loading="lazy">
-      <p>むすひ ／ 北海道札幌市</p>
+      <p>むすひ ／ 北海道旭川市</p>
       <p>Instagram運用代行／現場撮影／ショート動画制作</p>
     </div>
     <nav class="footer-nav" aria-label="フッターナビゲーション">
@@ -1309,72 +1351,146 @@ svg{display:block}
   }
 })();
 
-  /* ===== 動き：スクロール表示・ヘッダー・進捗バー・業種スライダー ===== */
+  /* ===== 動き ===== */
   (function () {
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var hasIO = 'IntersectionObserver' in window;
 
-    // 1. スクロールで要素を出す
-    var targets = document.querySelectorAll(
-      '.section-head, .sol-card, .field-card, .spot-card, .plan, .reason, .flow-item, .faq-item, .opt-row, .tier, .ms-item, .cond-box, .about-inner, .contact-card, .company-table, .tl-item, .hero-form, .option-wrap'
-    );
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      targets.forEach(function (el) { el.classList.add('is-in'); });
-    } else {
-      targets.forEach(function (el) { el.classList.add('reveal'); });
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var siblings = Array.prototype.slice.call(entry.target.parentNode.children);
-          var idx = Math.min(siblings.indexOf(entry.target), 5);
-          entry.target.style.transitionDelay = (idx * 0.07) + 's';
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-      targets.forEach(function (el) { io.observe(el); });
-      // 監視が働かない環境でも必ず見えるようにする保険
-      setTimeout(function () { targets.forEach(function (el) { el.classList.add('is-in'); }); }, 2600);
+    /* 1. ヒーローの入場 */
+    var hero = document.querySelector('.hero');
+    if (hero) {
+      var heroCol = hero.querySelector('.hero-copy') || hero.querySelector('.container > div');
+      if (heroCol && !reduce) {
+        Array.prototype.forEach.call(heroCol.children, function (el) { el.classList.add('hero-anim'); });
+      }
+      var markReady = function () { hero.classList.add('hero-ready'); };
+      requestAnimationFrame(function () { requestAnimationFrame(markReady); });
+      setTimeout(markReady, 400); /* 描画が止まっている環境への保険 */
+      /* スクロールを促す矢印 */
+      if (!reduce) {
+        var hint = document.createElement('div');
+        hint.className = 'scroll-hint';
+        hint.setAttribute('aria-hidden', 'true');
+        hint.innerHTML = 'SCROLL<span></span>';
+        if (getComputedStyle(hero).position === 'static') hero.style.position = 'relative';
+        hero.appendChild(hint);
+      }
     }
 
-    // 2. ヘッダーの影 ＋ 3. スクロール進捗バー
+    /* 2. スクロールで出す */
+    var targets = document.querySelectorAll(
+      '.section-head, .sol-card, .field-card, .spot-card, .plan, .reason, .flow-item, .faq-item, .opt-row, .tier, .ms-item, .cond-box, .about-inner, .contact-card, .company-table, .company-logo, .tl-item, .option-wrap, .svc-card'
+    );
+    function showAll() {
+      Array.prototype.forEach.call(targets, function (el) { el.classList.add('is-in'); });
+    }
+    if (reduce || !hasIO) {
+      showAll();
+    } else {
+      Array.prototype.forEach.call(targets, function (el) { el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          var sibs = Array.prototype.slice.call(e.target.parentNode.children);
+          e.target.style.transitionDelay = Math.min(sibs.indexOf(e.target), 5) * 0.08 + 's';
+          e.target.classList.add('is-in');
+          io.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -10% 0px', threshold: 0.06 });
+      Array.prototype.forEach.call(targets, function (el) { io.observe(el); });
+      setTimeout(showAll, 3000); /* 監視が働かない環境でも必ず見せる */
+    }
+
+    /* 3. 数字のカウントアップ */
+    function countUp(el) {
+      var raw = el.textContent.trim();
+      var m = raw.match(/^([^\d]*)([\d,]+)(.*)$/);
+      if (!m) return;
+      var target = parseInt(m[2].replace(/,/g, ''), 10);
+      if (!isFinite(target) || target <= 0) return;
+      var pre = m[1], post = m[3], grouped = m[2].indexOf(',') > -1;
+      var dur = 1100, t0 = null;
+      el.classList.add('count');
+      function frame(ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var v = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = pre + (grouped ? v.toLocaleString('ja-JP') : v) + post;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+      setTimeout(function () {
+        el.textContent = pre + (grouped ? target.toLocaleString('ja-JP') : target) + post;
+      }, dur + 500);
+    }
+    var nums = document.querySelectorAll('.price-num, .sol-num, .badge-big em, .flow-num');
+    if (!reduce && hasIO) {
+      var io2 = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          countUp(e.target);
+          io2.unobserve(e.target);
+        });
+      }, { threshold: 0.6 });
+      Array.prototype.forEach.call(nums, function (el) { io2.observe(el); });
+    }
+
+    /* 4. ヘッダーの影・進捗バー・下部の相談バー */
     var header = document.querySelector('.site-header');
     var bar = document.createElement('div');
     bar.className = 'scroll-progress';
     document.body.appendChild(bar);
-    var ticking = false;
+
+    var cta = document.createElement('div');
+    cta.className = 'sticky-cta';
+    cta.innerHTML =
+      '<div class="sticky-cta-inner">' +
+      '<p>まずは30分、現状を聞かせてください<small>相談だけでも歓迎です。2営業日以内にご返信します。</small></p>' +
+      '<a class="btn btn-fill" href="#contact">無料で相談する<span class="arrow" aria-hidden="true">→</span></a>' +
+      '</div>';
+    document.body.appendChild(cta);
+    var contactSec = document.getElementById('contact');
+
+    function applyScrollState() {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      if (header) header.classList.toggle('is-scrolled', y > 8);
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+      /* ヒーローを抜けたら出し、問い合わせ欄に来たら引っ込める */
+      var passedHero = y > window.innerHeight * 0.8;
+      var atContact = contactSec && contactSec.getBoundingClientRect().top < window.innerHeight;
+      cta.classList.toggle('is-on', passedHero && !atContact);
+    }
+    /* 時間で間引く。rAFに任せると描画が止まった環境で二度と動かなくなる */
+    var lastRun = 0, queued = null;
     function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(function () {
-        var y = window.scrollY || document.documentElement.scrollTop;
-        if (header) header.classList.toggle('is-scrolled', y > 8);
-        var max = document.documentElement.scrollHeight - window.innerHeight;
-        bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
-        ticking = false;
-      });
+      var now = Date.now();
+      if (now - lastRun >= 80) { lastRun = now; applyScrollState(); return; }
+      if (queued) return;
+      queued = setTimeout(function () {
+        queued = null; lastRun = Date.now(); applyScrollState();
+      }, 80);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    // 4. 業種カードを自動スライダーにする（PC・モーション許可時のみ）
+    /* 5. 業種カードの自動スライダー（PCのみ） */
     var row = document.querySelector('.field-row');
-    if (row && !reduceMotion && window.innerWidth >= 768) {
+    if (row && !reduce && window.innerWidth >= 768) {
       var wrap = document.createElement('div');
       wrap.className = 'field-marquee';
       row.parentNode.insertBefore(wrap, row);
       wrap.appendChild(row);
       Array.prototype.slice.call(row.children).forEach(function (li) {
-        var clone = li.cloneNode(true);
-        clone.setAttribute('aria-hidden', 'true');
-        // 複製はスクロール監視の対象外。reveal のままだと永久に透明になる
-        clone.classList.remove('reveal');
-        clone.classList.add('is-in');
-        clone.style.transitionDelay = '0s';
-        row.appendChild(clone);
+        var c = li.cloneNode(true);
+        c.setAttribute('aria-hidden', 'true');
+        c.classList.remove('reveal');
+        c.classList.add('is-in');
+        c.style.transitionDelay = '0s';
+        row.appendChild(c);
       });
     }
   })();
-
 </script>
 
 </body>
