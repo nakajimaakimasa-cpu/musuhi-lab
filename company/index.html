@@ -403,6 +403,52 @@ svg{display:block}
 .footer-nav ul,.footer-sns ul{display:grid;gap:8px}
 .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;padding-top:20px;font-size:12px;color:var(--on-dark-muted)}
 @media (max-width:767px){.footer-grid{grid-template-columns:1fr;gap:32px}}
+
+/* ===== 料金カードの追加要素 ===== */
+.plan-target{margin:0 0 10px;font-size:13.5px;font-weight:700;color:var(--primary)}
+.plan-guarantee{margin:14px 0 0;padding:9px 12px;border-radius:var(--radius);background:var(--gray);color:var(--muted);font-size:12.5px;font-weight:700;text-align:center}
+.plan-guarantee-on{background:var(--primary);color:#fff}
+.plan-featured .plan-guarantee{background:rgba(255,255,255,.14);color:rgba(255,255,255,.85)}
+
+/* ===== 成果保証 ===== */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:48px}
+.tier{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 24px}
+.tier-plan{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--primary)}
+.tier-head{margin:0 0 10px;font-size:24px;font-weight:700;line-height:1.3;color:var(--ink)}
+.tier-desc{margin:0;font-size:13.5px;line-height:1.8;color:var(--muted)}
+.tier-top{background:var(--dark);border-color:var(--dark)}
+.tier-top .tier-head{color:#fff}
+.tier-top .tier-desc{color:rgba(255,255,255,.78)}
+.ms-lead{margin-top:6px}
+.ms-list{list-style:none;margin:20px 0 40px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:ms}
+.ms-item{background:var(--bg);border-radius:var(--radius);padding:22px 22px 24px;border-left:3px solid var(--primary-soft)}
+.ms-period{margin:0 0 6px;font-size:12.5px;font-weight:700;color:var(--primary)}
+.ms-goal{margin:0 0 8px;font-size:17px;font-weight:700;color:var(--ink)}
+.ms-metric{margin:0;font-size:13px;color:var(--muted)}
+.cond-box{background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px}
+.cond-list{margin:12px 0 0;padding-left:1.1em;font-size:13.5px;line-height:2;color:var(--muted)}
+.cond-list li{margin-bottom:4px}
+@media (max-width:900px){.tier-grid,.ms-list{grid-template-columns:1fr}}
+
+/* ===== 動き ===== */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .75s cubic-bezier(.2,.6,.2,1),transform .75s cubic-bezier(.2,.6,.2,1)}
+.reveal.is-in{opacity:1;transform:none}
+.site-header{transition:box-shadow .25s ease}
+.site-header.is-scrolled{box-shadow:0 2px 18px rgba(20,32,26,.09)}
+.scroll-progress{position:fixed;left:0;top:0;height:3px;width:0;background:var(--primary);z-index:100;transition:width .12s linear;pointer-events:none}
+.plan,.sol-card,.field-card,.spot-card,.reason,.tier,.ms-item{transition:transform .28s ease,box-shadow .28s ease}
+.plan:hover,.sol-card:hover,.field-card:hover,.spot-card:hover,.tier:hover,.ms-item:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(20,32,26,.10)}
+.btn:hover .arrow,.btn:focus-visible .arrow{transform:translateX(5px)}
+
+/* 業種の自動スライダー（PCのみ。JSで組み立てる） */
+.field-marquee{overflow:hidden;position:relative;margin:0 -20px;padding:6px 20px}
+.field-marquee::before,.field-marquee::after{content:"";position:absolute;top:0;bottom:0;width:72px;z-index:2;pointer-events:none}
+.field-marquee::before{left:0;background:linear-gradient(90deg,var(--gray),rgba(241,243,243,0))}
+.field-marquee::after{right:0;background:linear-gradient(270deg,var(--gray),rgba(241,243,243,0))}
+.field-marquee .field-row{display:flex;grid-template-columns:none;flex-wrap:nowrap;width:max-content;gap:16px;animation:musuhi-marquee 64s linear infinite}
+.field-marquee .field-card{flex:0 0 244px}
+.field-marquee:hover .field-row,.field-marquee:focus-within .field-row{animation-play-state:paused}
+@keyframes musuhi-marquee{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 8px))}}
 </style>
 </head>
 <body>
@@ -418,7 +464,7 @@ svg{display:block}
       <ul class="nav-list">
         <li><a href="#services">サービス</a></li>
         <li><a href="#reasons">選ばれる理由</a></li>
-        <li><a href="#pricing">料金</a></li>
+        <li><a href="#pricing">料金</a></li><li><a href="#guarantee">成果保証</a></li>
         <li><a href="#flow">ご契約の流れ</a></li>
         <li><a href="#faq">よくある質問</a></li>
         <li><a href="#company">会社概要</a></li>
@@ -451,7 +497,7 @@ svg{display:block}
         <ul class="fact-badges" aria-label="サービスの事実">
           <li><span class="badge-big">道内どこでも</span><span class="badge-small">現場撮影</span></li>
           <li><span class="badge-big">月<em>4〜12</em>本</span><span class="badge-small">投稿</span></li>
-          <li><span class="badge-big">最短<em>3</em>ヶ月</span><span class="badge-small">から始められる</span></li>
+          <li><span class="badge-big">契約<em>6</em>ヶ月</span><span class="badge-small">成果を見る単位</span></li>
         </ul>
       </div>
       <div class="hero-form-wrap">
@@ -839,52 +885,63 @@ svg{display:block}
       <div class="section-head">
         <p class="label">Plan</p>
         <h2 id="pricing-title">料金プラン</h2>
-        <p class="section-note">すべて税別・月額。道内遠方への撮影は交通費実費。最短契約3ヶ月（運用が形になる6ヶ月を推奨）。</p>
+        <p class="section-note">すべて税別・月額。契約期間は6ヶ月。道内遠方への撮影は交通費実費。別途、初回のみアカウント設計・競合分析費 200,000円をいただきます。</p>
       </div>
       <div class="plan-grid">
-        <article class="plan">
-          <h3>ライト</h3>
-          <p class="price"><span class="price-label">月額</span> <span class="price-num">30,000</span><span class="price-unit">円</span></p>
-          <ul class="plan-list">
-            <li>投稿4本/月</li>
-            <li>素材はお客様支給</li>
-            <li>キャプション・ハッシュタグ作成</li>
-            <li>投稿代行</li>
-          </ul>
-          <a class="btn btn-line btn-block" href="#contact-form" data-plan="ライト">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
-        </article>
-        <article class="plan plan-featured">
-          <span class="plan-badge">おすすめ</span>
-          <h3>スタンダード</h3>
-          <p class="price"><span class="price-label">月額</span> <span class="price-num">80,000</span><span class="price-unit">円</span></p>
-          <ul class="plan-list">
-            <li>投稿8本/月</li>
-            <li>リール2本</li>
-            <li>現場撮影 月1回</li>
-            <li>月次の簡易レポート</li>
-          </ul>
-          <a class="btn btn-fill btn-block" href="#contact-form" data-plan="スタンダード">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
-        </article>
-        <article class="plan">
-          <h3>フル</h3>
-          <p class="price"><span class="price-label">月額</span> <span class="price-num">150,000</span><span class="price-unit">円</span></p>
-          <ul class="plan-list">
-            <li>投稿12本/月</li>
-            <li>リール4本</li>
-            <li>現場撮影 月2回</li>
-            <li>月次レポート＋改善提案</li>
-          </ul>
-          <a class="btn btn-line btn-block" href="#contact-form" data-plan="フル">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
-        </article>
-      </div>
-      <div class="option-wrap">
+            <article class="plan">
+              <h3>スタート</h3>
+              <p class="plan-target">企画と編集を任せたい</p>
+              <p class="price"><span class="price-label">月額</span> <span class="price-num">150,000</span><span class="price-unit">円</span></p>
+              <ul class="plan-list">
+                <li>リール 月4本</li>
+                <li>撮影は自社（台本・撮り方の指示書をお渡し）</li>
+                <li>コンセプト設計・企画・台本</li>
+                <li>編集・投稿・ハッシュタグ設計</li>
+                <li>月次レポート</li>
+              </ul>
+              <p class="plan-guarantee">成果保証なし</p>
+              <a class="btn btn-line btn-block" href="#contact-form" data-plan="スタート">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
+            </article>
+            <article class="plan plan-featured">
+              <span class="plan-badge">最も選ばれています</span>
+              <h3>グロース</h3>
+              <p class="plan-target">撮影から投稿まで任せたい</p>
+              <p class="price"><span class="price-label">月額</span> <span class="price-num">250,000</span><span class="price-unit">円</span></p>
+              <ul class="plan-list">
+                <li>リール 月8本 ＋ ストーリーズ</li>
+                <li>現場での撮影同行 月1回</li>
+                <li>コメント・DM対応</li>
+                <li>月次ミーティングで企画入替</li>
+                <li>スタートの内容をすべて含む</li>
+              </ul>
+              <p class="plan-guarantee">成果保証なし</p>
+              <a class="btn btn-fill btn-block" href="#contact-form" data-plan="グロース">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
+            </article>
+            <article class="plan">
+              <h3>フルサポート</h3>
+              <p class="plan-target">採用・集客の主軸にしたい</p>
+              <p class="price"><span class="price-label">月額</span> <span class="price-num">400,000</span><span class="price-unit">円</span></p>
+              <ul class="plan-list">
+                <li>リール 月12本 ＋ ストーリーズ毎日</li>
+                <li>現場での撮影同行 月2回</li>
+                <li>TikTok・YouTubeショートへ転用</li>
+                <li>広告運用サポート／隔週ミーティング</li>
+                <li>グロースの内容をすべて含む</li>
+              </ul>
+              <p class="plan-guarantee plan-guarantee-on">6ヶ月で成果が出なければ全額返金</p>
+              <a class="btn btn-line btn-block" href="#contact-form" data-plan="フルサポート">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
+            </article>
+          </div>
+          <div class="option-wrap">
         <h3 class="sub-head">オプション料金（目安）</h3>
         <dl class="opt-list">
-          <div class="opt-row"><dt>追加投稿</dt><dd><small>1本</small> 5,000円<small>〜</small></dd></div>
-          <div class="opt-row"><dt>追加リール制作</dt><dd><small>1本</small> 15,000円<small>〜</small></dd></div>
-          <div class="opt-row"><dt>追加現場撮影</dt><dd><small>半日</small> 20,000円<small>〜</small></dd></div>
-          <div class="opt-row"><dt>プロフィール設計・アカウント開設</dt><dd>20,000円<small>（初回のみ）</small></dd></div>
-        </dl>
+              <div class="opt-row"><dt>撮影の追加同行</dt><dd><small>1回</small> 60,000円<small>〜</small></dd></div>
+              <div class="opt-row"><dt>撮影代行（カメラマン・機材手配）</dt><dd>別途お見積り</dd></div>
+              <div class="opt-row"><dt>リールの追加制作</dt><dd><small>1本</small> 30,000円<small>〜</small></dd></div>
+              <div class="opt-row"><dt>TikTok・YouTubeショートへの転用</dt><dd><small>月</small> 30,000円<small>〜</small></dd></div>
+              <div class="opt-row"><dt>Instagram広告の運用</dt><dd>広告費の<small>20%</small></dd></div>
+              <div class="opt-row"><dt>ホームページ制作を同時にご依頼</dt><dd>制作費 10%<small>OFF</small></dd></div>
+            </dl>
         <p class="table-note">上記は目安です。内容により個別にお見積りします。</p>
       </div>
       <div class="section-cta">
@@ -893,7 +950,51 @@ svg{display:block}
     </div>
   </section>
 
-  <!-- 11. Q&A -->
+        <!-- 成果保証 -->
+      <section id="guarantee" class="section band-tint" aria-labelledby="guarantee-title">
+        <div class="container">
+          <div class="section-head">
+            <p class="label">Guarantee</p>
+            <h2 id="guarantee-title">フルサポートプランは、成果が出なければ全額返金します</h2>
+            <p class="section-note">「やってみたけど何も変わらなかった」という結果に、お金だけが残らないようにするための約束です。返金保証はフルサポートプランのみに付きます。</p>
+          </div>
+          <div class="tier-grid">
+            <article class="tier">
+              <p class="tier-plan">スタート</p>
+              <p class="tier-head">返金保証なし</p>
+              <p class="tier-desc">成果指標の設定と月次レポートは、どのプランでもお出しします。</p>
+            </article>
+            <article class="tier">
+              <p class="tier-plan">グロース</p>
+              <p class="tier-head">返金保証なし</p>
+              <p class="tier-desc">返金保証をご希望の場合は、フルサポートプランをご検討ください。</p>
+            </article>
+            <article class="tier tier-top">
+              <p class="tier-plan">フルサポート</p>
+              <p class="tier-head">全額を返金</p>
+              <p class="tier-desc">6ヶ月時点で未達の場合、お支払いいただいた月額を全額返金します。</p>
+            </article>
+          </div>
+          <h3 class="sub-head">成果の基準は、初回ミーティングで御社と一緒に決めます</h3>
+          <p class="section-note ms-lead">6ヶ月を3段階に分け、どの数字をどこまで伸ばすかを先に合意してから始めます。</p>
+          <ol class="ms-list">
+            <li class="ms-item"><p class="ms-period">1〜2ヶ月目</p><p class="ms-goal">投稿の型を固める</p><p class="ms-metric">追う数字：平均再生数 ／ 保存率</p></li>
+            <li class="ms-item"><p class="ms-period">3〜4ヶ月目</p><p class="ms-goal">当たった型を量産する</p><p class="ms-metric">追う数字：プロフィールアクセス数</p></li>
+            <li class="ms-item"><p class="ms-period">5〜6ヶ月目</p><p class="ms-goal">問い合わせ・応募につなげる</p><p class="ms-metric">追う数字：問い合わせ件数 ／ 指名検索</p></li>
+          </ol>
+          <div class="cond-box">
+            <h3 class="sub-head">適用の条件</h3>
+            <ul class="cond-list">
+              <li>成果指標と目標値は、業種・商圏・現在のアカウント状況をふまえて初回ミーティングで御社と合意し、着手します</li>
+              <li>出演・情報共有にご協力いただけることが前提です</li>
+              <li>月1回の確認ミーティングにご参加ください</li>
+              <li>契約期間は6ヶ月です。期間の途中でご解約された場合は対象外となります</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. Q&A -->
   <section id="faq" class="section band-gray" aria-labelledby="faq-title">
     <div class="container">
       <div class="section-head">
@@ -915,8 +1016,8 @@ svg{display:block}
           <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>北海道内は対応します。交通費は実費でお願いしています。</p></div>
         </details>
         <details class="faq-item">
-          <summary><span class="faq-q" aria-hidden="true">Q</span>最短の契約期間は？</summary>
-          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>3ヶ月です。フォロワーと問い合わせが形になるまで、6ヶ月の継続をおすすめしています。</p></div>
+          <summary><span class="faq-q" aria-hidden="true">Q</span>契約期間はどのくらいですか？</summary>
+          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>6ヶ月です。1〜2ヶ月では投稿の型が固まらず、成果が出たかどうかを判断できないためです。6ヶ月を3段階に分け、各段階で追う数字を先に決めてから始めます。</p></div>
         </details>
         <details class="faq-item">
           <summary><span class="faq-q" aria-hidden="true">Q</span>投稿前に内容を確認できますか？</summary>
@@ -932,7 +1033,7 @@ svg{display:block}
         </details>
         <details class="faq-item">
           <summary><span class="faq-q" aria-hidden="true">Q</span>途中で解約できますか？</summary>
-          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>最短契約期間（3ヶ月）を過ぎれば、1ヶ月前のご連絡で解約できます。</p></div>
+          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>契約期間は6ヶ月です。満了後は1ヶ月前のご連絡で解約できます。</p></div>
         </details>
       </div>
     </div>
@@ -1207,6 +1308,73 @@ svg{display:block}
     });
   }
 })();
+
+  /* ===== 動き：スクロール表示・ヘッダー・進捗バー・業種スライダー ===== */
+  (function () {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 1. スクロールで要素を出す
+    var targets = document.querySelectorAll(
+      '.section-head, .sol-card, .field-card, .spot-card, .plan, .reason, .flow-item, .faq-item, .opt-row, .tier, .ms-item, .cond-box, .about-inner, .contact-card, .company-table, .tl-item, .hero-form, .option-wrap'
+    );
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('is-in'); });
+    } else {
+      targets.forEach(function (el) { el.classList.add('reveal'); });
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var siblings = Array.prototype.slice.call(entry.target.parentNode.children);
+          var idx = Math.min(siblings.indexOf(entry.target), 5);
+          entry.target.style.transitionDelay = (idx * 0.07) + 's';
+          entry.target.classList.add('is-in');
+          io.unobserve(entry.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      targets.forEach(function (el) { io.observe(el); });
+      // 監視が働かない環境でも必ず見えるようにする保険
+      setTimeout(function () { targets.forEach(function (el) { el.classList.add('is-in'); }); }, 2600);
+    }
+
+    // 2. ヘッダーの影 ＋ 3. スクロール進捗バー
+    var header = document.querySelector('.site-header');
+    var bar = document.createElement('div');
+    bar.className = 'scroll-progress';
+    document.body.appendChild(bar);
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        var y = window.scrollY || document.documentElement.scrollTop;
+        if (header) header.classList.toggle('is-scrolled', y > 8);
+        var max = document.documentElement.scrollHeight - window.innerHeight;
+        bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+        ticking = false;
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // 4. 業種カードを自動スライダーにする（PC・モーション許可時のみ）
+    var row = document.querySelector('.field-row');
+    if (row && !reduceMotion && window.innerWidth >= 768) {
+      var wrap = document.createElement('div');
+      wrap.className = 'field-marquee';
+      row.parentNode.insertBefore(wrap, row);
+      wrap.appendChild(row);
+      Array.prototype.slice.call(row.children).forEach(function (li) {
+        var clone = li.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        // 複製はスクロール監視の対象外。reveal のままだと永久に透明になる
+        clone.classList.remove('reveal');
+        clone.classList.add('is-in');
+        clone.style.transitionDelay = '0s';
+        row.appendChild(clone);
+      });
+    }
+  })();
+
 </script>
 
 </body>
