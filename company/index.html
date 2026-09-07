@@ -539,6 +539,13 @@ svg{display:block}
 .hero .hero-form-wrap,.hero .card-form,.hero .card-form label,.hero .form-title{color:var(--ink)}
 .hero .form-lead,.hero .form-status{color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.hero-bg img,.fact-badges li,.ticker-track{animation:none}}
+
+/* 返金保証は1プランだけなので、比較表ではなく1本の帯で言い切る */
+.guarantee-band{background:var(--dark);color:#fff;border-radius:var(--radius);padding:34px 36px;margin-bottom:48px;display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center}
+.gb-plan{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--primary-soft)}
+.gb-head{margin:0;font-size:clamp(24px,3vw,32px);font-weight:700;line-height:1.35}
+.gb-desc{margin:0;font-size:14px;line-height:1.9;color:rgba(255,255,255,.78)}
+@media (max-width:900px){.guarantee-band{grid-template-columns:1fr;gap:16px;padding:26px 22px}}
 </style>
 </head>
 <body>
@@ -587,7 +594,7 @@ svg{display:block}
         <ul class="fact-badges" aria-label="サービスの事実">
           <li><span class="badge-big">道内どこでも</span><span class="badge-small">現場撮影</span></li>
           <li><span class="badge-big">月<em>4〜12</em>本</span><span class="badge-small">投稿</span></li>
-          <li><span class="badge-big">契約<em>6</em>ヶ月</span><span class="badge-small">成果を見る単位</span></li>
+          <li><span class="badge-big">初回相談<em>0</em>円</span><span class="badge-small">オンライン可</span></li>
         </ul>
       </div>
       <div class="hero-form-wrap">
@@ -977,7 +984,7 @@ svg{display:block}
       <div class="section-head">
         <p class="label">Plan</p>
         <h2 id="pricing-title">料金プラン</h2>
-        <p class="section-note">すべて税別・月額。契約期間は6ヶ月。道内遠方への撮影は交通費実費。別途、初回のみアカウント設計・競合分析費 200,000円をいただきます。</p>
+        <p class="section-note">すべて税別・月額。道内遠方への撮影は交通費実費。別途、初回のみアカウント設計・競合分析費 200,000円をいただきます。</p>
       </div>
       <div class="plan-grid">
             <article class="plan">
@@ -994,7 +1001,6 @@ svg{display:block}
               <a class="btn btn-line btn-block" href="#contact-form" data-plan="スタート">このプランで相談する<span class="arrow" aria-hidden="true">→</span></a>
             </article>
             <article class="plan plan-featured">
-              <span class="plan-badge">最も選ばれています</span>
               <h3>グロース</h3>
               <p class="plan-target">撮影から投稿まで任せたい</p>
               <p class="price"><span class="price-label">月額</span> <span class="price-num">250,000</span><span class="price-unit">円</span></p>
@@ -1028,8 +1034,6 @@ svg{display:block}
               <div class="opt-row"><dt>撮影の追加同行</dt><dd><small>1回</small> 60,000円<small>〜</small></dd></div>
               <div class="opt-row"><dt>撮影代行（カメラマン・機材手配）</dt><dd>別途お見積り</dd></div>
               <div class="opt-row"><dt>リールの追加制作</dt><dd><small>1本</small> 30,000円<small>〜</small></dd></div>
-              <div class="opt-row"><dt>TikTok・YouTubeショートへの転用</dt><dd><small>月</small> 30,000円<small>〜</small></dd></div>
-              <div class="opt-row"><dt>Instagram広告の運用</dt><dd>広告費の<small>20%</small></dd></div>
               <div class="opt-row"><dt>ホームページ制作を同時にご依頼</dt><dd>制作費 10%<small>OFF</small></dd></div>
             </dl>
         <p class="table-note">上記は目安です。内容により個別にお見積りします。</p>
@@ -1048,22 +1052,10 @@ svg{display:block}
             <h2 id="guarantee-title">フルサポートプランは、成果が出なければ全額返金します</h2>
             <p class="section-note">「やってみたけど何も変わらなかった」という結果に、お金だけが残らないようにするための約束です。返金保証はフルサポートプランのみに付きます。</p>
           </div>
-          <div class="tier-grid">
-            <article class="tier">
-              <p class="tier-plan">スタート</p>
-              <p class="tier-head">返金保証なし</p>
-              <p class="tier-desc">成果指標の設定と月次レポートは、どのプランでもお出しします。</p>
-            </article>
-            <article class="tier">
-              <p class="tier-plan">グロース</p>
-              <p class="tier-head">返金保証なし</p>
-              <p class="tier-desc">返金保証をご希望の場合は、フルサポートプランをご検討ください。</p>
-            </article>
-            <article class="tier tier-top">
-              <p class="tier-plan">フルサポート</p>
-              <p class="tier-head">全額を返金</p>
-              <p class="tier-desc">6ヶ月時点で未達の場合、お支払いいただいた月額を全額返金します。</p>
-            </article>
+          <div class="guarantee-band">
+            <p class="gb-plan">フルサポートプラン</p>
+            <p class="gb-head">6ヶ月で成果が出なければ、全額返金</p>
+            <p class="gb-desc">6ヶ月時点で、着手前に合意した成果指標に届かなかった場合、お支払いいただいた月額を全額返金します。</p>
           </div>
           <h3 class="sub-head">成果の基準は、初回ミーティングで御社と一緒に決めます</h3>
           <p class="section-note ms-lead">6ヶ月を3段階に分け、どの数字をどこまで伸ばすかを先に合意してから始めます。</p>
@@ -1078,7 +1070,7 @@ svg{display:block}
               <li>成果指標と目標値は、業種・商圏・現在のアカウント状況をふまえて初回ミーティングで御社と合意し、着手します</li>
               <li>出演・情報共有にご協力いただけることが前提です</li>
               <li>月1回の確認ミーティングにご参加ください</li>
-              <li>契約期間は6ヶ月です。期間の途中でご解約された場合は対象外となります</li>
+              <li>フルサポートプランを6ヶ月ご継続いただくことが前提です。途中でご解約された場合は対象外となります</li>
             </ul>
           </div>
         </div>
@@ -1107,7 +1099,7 @@ svg{display:block}
         </details>
         <details class="faq-item">
           <summary><span class="faq-q" aria-hidden="true">Q</span>契約期間はどのくらいですか？</summary>
-          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>6ヶ月です。1〜2ヶ月では投稿の型が固まらず、成果が出たかどうかを判断できないためです。6ヶ月を3段階に分け、各段階で追う数字を先に決めてから始めます。</p></div>
+          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>投稿の型が固まるまで2〜3ヶ月が目安です。数字が大きく動きはじめるのは4ヶ月目以降という想定で設計しています。</p></div>
         </details>
         <details class="faq-item">
           <summary><span class="faq-q" aria-hidden="true">Q</span>投稿前に内容を確認できますか？</summary>
@@ -1123,7 +1115,7 @@ svg{display:block}
         </details>
         <details class="faq-item">
           <summary><span class="faq-q" aria-hidden="true">Q</span>途中で解約できますか？</summary>
-          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>契約期間は6ヶ月です。満了後は1ヶ月前のご連絡で解約できます。</p></div>
+          <div class="faq-body"><span class="faq-a" aria-hidden="true">A</span><p>フルサポートプランは返金保証を6ヶ月時点で判定するため、6ヶ月からのご契約となります。その他のプランはご相談のうえ決めさせていただきます。</p></div>
         </details>
       </div>
     </div>
@@ -1489,7 +1481,9 @@ svg{display:block}
         el.textContent = pre + (grouped ? target.toLocaleString('ja-JP') : target) + post;
       }, dur + 500);
     }
-    var nums = document.querySelectorAll('.price-num, .sol-num, .badge-big em, .flow-num');
+    /* 料金はカウントアップの対象にしない。
+   途中値（149,967円 など）が一瞬でも実在する金額に見えてしまうため。 */
+    var nums = document.querySelectorAll('.sol-num, .badge-big em, .flow-num');
     if (!reduce && hasIO) {
       var io2 = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
