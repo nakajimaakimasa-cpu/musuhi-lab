@@ -326,6 +326,7 @@ svg{display:block}
 .price-label{margin-right:6px;font-size:13px;color:var(--muted)}
 .price-num{font-size:36px;font-weight:700;color:var(--primary);letter-spacing:.01em}
 .price-unit{margin-left:2px;font-size:15px;font-weight:700}
+.price-init{margin:-12px 0 20px;font-size:12.5px;color:var(--muted);text-align:center;line-height:1.6}
 .plan-list{flex:1;margin-bottom:24px}
 .plan-list li{position:relative;padding:8px 0 8px 30px;border-bottom:1px dashed var(--line);font-size:15px;line-height:1.6}
 .plan-list li::before{top:12px}
