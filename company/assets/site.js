@@ -154,6 +154,39 @@
     setTimeout(markReady, 400); /* 描画が止まっている環境への保険 */
   }
 
+  /* ---------- ヒーローの業種切替（トップのみ。写真が2枚以上あるときだけ動く） ----------
+     一次産業の写真をラベル付きでクロスフェードする。reduce 指定時は1枚目で固定。 */
+  (function () {
+    var slides = document.querySelectorAll('.hero-bg .hero-slide');
+    if (slides.length < 2) return;
+    var label = document.querySelector('[data-industry-label]');
+    var nameEl = document.querySelector('[data-industry-name]');
+    var enEl = document.querySelector('[data-industry-en-label]');
+    var numEl = document.querySelector('[data-industry-num]');
+    var INTERVAL_MS = 7000;
+    var current = 0;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function show(index) {
+      Array.prototype.forEach.call(slides, function (img, i) {
+        img.classList.toggle('is-active', i === index);
+      });
+      var img = slides[index];
+      if (nameEl) nameEl.textContent = img.getAttribute('data-industry') || '';
+      if (enEl) enEl.textContent = img.getAttribute('data-industry-en') || '';
+      if (numEl) numEl.textContent = pad(index + 1) + ' / ' + pad(slides.length);
+    }
+
+    if (label) label.hidden = false;
+    show(0);
+    if (reduce) return;
+    setInterval(function () {
+      current = (current + 1) % slides.length;
+      show(current);
+    }, INTERVAL_MS);
+  })();
+
   var targets = document.querySelectorAll(
     '.section-head, .service-card, .spot-card, .field-card, .plan, .tier, .ms-item, .cond-box, .opt-row, .cta-card, .faq-item, .flow-item, .tl-item, .option-wrap'
   );

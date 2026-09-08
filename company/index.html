@@ -46,8 +46,17 @@
 
   <!-- 1. HERO -->
   <section id="hero" class="hero" aria-labelledby="hero-title">
+    <!-- 業種切替: JSが .hero-slide を順に is-active にする（農業→漁業→酪農→林業）。
+         data-industry / data-industry-en が右下のラベルに出る -->
     <div class="hero-bg" aria-hidden="true">
-      <img src="img/hero.jpg" alt="" width="1400" height="2100" loading="eager" fetchpriority="high">
+      <img class="hero-slide is-active" src="img/hero.jpg" alt="" width="1400" height="2100" loading="eager" fetchpriority="high" data-industry="農業" data-industry-en="Agriculture">
+      <img class="hero-slide" src="img/fishing.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="漁業" data-industry-en="Fishery">
+      <img class="hero-slide" src="img/dairy.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="酪農" data-industry-en="Dairy">
+      <img class="hero-slide" src="img/forestry.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="林業" data-industry-en="Forestry">
+    </div>
+    <div class="hero-industry" aria-hidden="true" data-industry-label hidden>
+      <span class="hi-num" data-industry-num>01 / 04</span>
+      <span class="hi-name"><b data-industry-name>農業</b><span data-industry-en-label>Agriculture</span></span>
     </div>
     <div class="container hero-grid">
       <div class="hero-copy">
