@@ -159,32 +159,39 @@
   (function () {
     var slides = document.querySelectorAll('.hero-bg .hero-slide');
     if (slides.length < 2) return;
-    var label = document.querySelector('[data-industry-label]');
-    var nameEl = document.querySelector('[data-industry-name]');
-    var enEl = document.querySelector('[data-industry-en-label]');
-    var numEl = document.querySelector('[data-industry-num]');
+    var captions = document.querySelectorAll('.hero-captions [data-slide]');
     var INTERVAL_MS = 7000;
+    var TICK_MS = 100;
     var current = 0;
-
-    function pad(n) { return n < 10 ? '0' + n : String(n); }
+    var elapsed = 0;
 
     function show(index) {
+      current = index;
+      elapsed = 0;
       Array.prototype.forEach.call(slides, function (img, i) {
         img.classList.toggle('is-active', i === index);
       });
-      var img = slides[index];
-      if (nameEl) nameEl.textContent = img.getAttribute('data-industry') || '';
-      if (enEl) enEl.textContent = img.getAttribute('data-industry-en') || '';
-      if (numEl) numEl.textContent = pad(index + 1) + ' / ' + pad(slides.length);
+      Array.prototype.forEach.call(captions, function (btn, i) {
+        btn.setAttribute('aria-pressed', i === index ? 'true' : 'false');
+        btn.style.setProperty('--cap-progress', '0%');
+      });
     }
 
-    if (label) label.hidden = false;
+    Array.prototype.forEach.call(captions, function (btn) {
+      btn.addEventListener('click', function () {
+        show(Number(btn.getAttribute('data-slide')) || 0);
+      });
+    });
+
     show(0);
     if (reduce) return;
+    /* 進行線を伸ばしつつ、間隔が満ちたら次へ。クリックで切り替えた時は show() が elapsed を戻す */
     setInterval(function () {
-      current = (current + 1) % slides.length;
-      show(current);
-    }, INTERVAL_MS);
+      elapsed += TICK_MS;
+      var active = captions[current];
+      if (active) active.style.setProperty('--cap-progress', Math.min(100, elapsed / INTERVAL_MS * 100) + '%');
+      if (elapsed >= INTERVAL_MS) show((current + 1) % slides.length);
+    }, TICK_MS);
   })();
 
   var targets = document.querySelectorAll(
@@ -210,10 +217,8 @@
     setTimeout(showAll, 3000); /* 監視が働かない環境でも必ず見せる */
   }
 
-  /* ---------- ヘッダーの影・進捗バー・下部の相談バー ---------- */
-  var bar = document.createElement('div');
-  bar.className = 'scroll-progress';
-  document.body.appendChild(bar);
+  /* ---------- ヘッダーの影・下部の相談バー ----------
+     上端の進捗バーは「遊びが多すぎる」ため撤去した（9/9）。 */
 
   /* 問い合わせ先はページごとに違う（トップは #contact、下層は ../../index.html#contact）。
      ヘッダーのお問い合わせボタンから同じ行き先を借りる。 */
@@ -233,8 +238,6 @@
   function applyScrollState() {
     var y = window.scrollY || document.documentElement.scrollTop;
     if (header) header.classList.toggle('is-scrolled', y > 8);
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
     var passedHero = y > window.innerHeight * 0.8;
     var atContact = contactSec && contactSec.getBoundingClientRect().top < window.innerHeight;
     cta.classList.toggle('is-on', passedHero && !atContact);

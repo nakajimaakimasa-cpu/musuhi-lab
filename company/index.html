@@ -45,77 +45,32 @@
 <main id="main">
 
   <!-- 1. HERO -->
-  <section id="hero" class="hero" aria-labelledby="hero-title">
-    <!-- 業種切替: JSが .hero-slide を順に is-active にする（農業→漁業→酪農→林業）。
-         data-industry / data-industry-en が右下のラベルに出る -->
+  <!-- Le Labo のトップに寄せた静かな構成: 写真を画面いっぱいに敷き、文字は左下に少しだけ。
+       下端の業種キャプション（農業/漁業/酪農/林業）が写真の切替と連動し、押すと切り替わる。
+       丸バッジ・チップ・流れる帯・ヒーロー上のフォームは「遊びが多すぎる」ため撤去（フォームは #contact に1本） -->
+  <section id="hero" class="hero hero-quiet" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true">
-      <img class="hero-slide is-active" src="img/hero.jpg" alt="" width="1400" height="2100" loading="eager" fetchpriority="high" data-industry="農業" data-industry-en="Agriculture">
-      <img class="hero-slide" src="img/fishing.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="漁業" data-industry-en="Fishery">
-      <img class="hero-slide" src="img/dairy.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="酪農" data-industry-en="Dairy">
-      <img class="hero-slide" src="img/forestry.jpg" alt="" width="1200" height="800" loading="lazy" data-industry="林業" data-industry-en="Forestry">
+      <img class="hero-slide is-active" src="img/hero.jpg" alt="" width="1400" height="2100" loading="eager" fetchpriority="high">
+      <img class="hero-slide" src="img/fishing.jpg" alt="" width="1200" height="800" loading="lazy">
+      <img class="hero-slide" src="img/dairy.jpg" alt="" width="1200" height="800" loading="lazy">
+      <img class="hero-slide" src="img/forestry.jpg" alt="" width="1200" height="800" loading="lazy">
     </div>
-    <div class="hero-industry" aria-hidden="true" data-industry-label hidden>
-      <span class="hi-num" data-industry-num>01 / 04</span>
-      <span class="hi-name"><b data-industry-name>農業</b><span data-industry-en-label>Agriculture</span></span>
-    </div>
-    <div class="container hero-grid">
+    <div class="container hero-quiet-inner">
       <div class="hero-copy">
-        <p class="chip">旭川発・道内の現場へ出向くInstagram運用代行</p>
+        <p class="hero-eyebrow">Musuhi — Asahikawa, Hokkaido</p>
         <h1 id="hero-title">Instagram運用代行・現場撮影</h1>
         <p class="hero-sub">現場の<b>「人」</b>を、選ばれる理由に。</p>
         <p class="lead">農場・漁港・工場・工事現場。ムスヒは旭川から現場へ出向き、社長や職人、生産者の顔と言葉でInstagramを育てます。撮影から投稿まで一人が通して担当し、続く形をつくります。</p>
-        <ul class="fact-badges" aria-label="サービスの事実">
-          <li><span class="badge-big">道内どこでも</span><span class="badge-small">現場撮影</span></li>
-          <li><span class="badge-big">月<em>4〜12</em>本</span><span class="badge-small">投稿</span></li>
-          <li><span class="badge-big">初回相談<em>0</em>円</span><span class="badge-small">オンライン可</span></li>
-        </ul>
+        <a class="btn btn-ghost" href="#contact">無料で相談する<span class="arrow" aria-hidden="true">→</span></a>
       </div>
-      <div class="hero-form-wrap">
-        <form class="card-form" data-lead-form aria-labelledby="hero-form-title" novalidate action="#" method="post">
-          <p class="form-title" id="hero-form-title">無料相談のお申し込み</p>
-          <p class="form-lead">2営業日以内にご返信します</p>
-          <div class="field-pair">
-            <div class="field">
-              <label for="h-company">会社名・屋号<span class="tag tag-opt">任意</span></label>
-              <input id="h-company" name="company" type="text" autocomplete="organization">
-            </div>
-            <div class="field">
-              <label for="h-name">お名前<span class="tag tag-req">必須</span></label>
-              <input id="h-name" name="name" type="text" autocomplete="name" required aria-describedby="h-name-error">
-              <p class="field-error" id="h-name-error" data-error-for="name" hidden></p>
-            </div>
-          </div>
-          <div class="field-pair">
-            <div class="field">
-              <label for="h-email">メール<span class="tag tag-req">必須</span></label>
-              <input id="h-email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="h-email-error">
-              <p class="field-error" id="h-email-error" data-error-for="email" hidden></p>
-            </div>
-            <div class="field">
-              <label for="h-tel">電話<span class="tag tag-opt">任意</span></label>
-              <input id="h-tel" name="tel" type="tel" autocomplete="tel" inputmode="tel">
-            </div>
-          </div>
-          <div class="field">
-            <label for="h-type">ご相談の種類</label>
-            <select id="h-type" name="type">
-              <option value="無料相談したい">無料相談したい</option>
-              <option value="料金について聞きたい">料金について聞きたい</option>
-              <option value="その他">その他</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="h-message">ご相談内容<span class="tag tag-opt">任意</span></label>
-            <textarea id="h-message" name="message" rows="4"></textarea>
-          </div>
-          <button class="btn btn-fill btn-block" type="submit">送信する<span class="arrow" aria-hidden="true">→</span></button>
-          <p class="form-status" role="status" aria-live="polite"></p>
-          <p class="form-note">送信ボタンを押すと、お使いのメールアプリが開きます。送信により<a href="privacy/">個人情報の取扱い</a>に同意したものとみなします。</p>
-        </form>
-      </div>
+      <ol class="hero-captions" aria-label="写真の業種">
+        <li><button type="button" data-slide="0" aria-pressed="true"><span class="cap-ja">農業</span><span class="cap-en">agriculture — 収穫・出荷・畑の一年</span></button></li>
+        <li><button type="button" data-slide="1" aria-pressed="false"><span class="cap-ja">漁業</span><span class="cap-en">fishery — 水揚げ・加工・浜の朝</span></button></li>
+        <li><button type="button" data-slide="2" aria-pressed="false"><span class="cap-ja">酪農</span><span class="cap-en">dairy — 搾乳・牧場の日常</span></button></li>
+        <li><button type="button" data-slide="3" aria-pressed="false"><span class="cap-ja">林業</span><span class="cap-en">forestry — 伐採・製材・木の仕事</span></button></li>
+      </ol>
     </div>
   </section>
-      <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>農業</span><span>漁業</span><span>酪農</span><span>林業</span><span>建設</span><span>製造・加工</span><span>医療・介護</span><span>福祉</span><span>観光・宿泊</span><span>飲食・小売</span><span>北海道のどんな現場へでも</span><span>農業</span><span>漁業</span><span>酪農</span><span>林業</span><span>建設</span><span>製造・加工</span><span>医療・介護</span><span>福祉</span><span>観光・宿泊</span><span>飲食・小売</span><span>北海道のどんな現場へでも</span></div></div>
 
 
   <!-- 2. NEWS -->
