@@ -256,6 +256,46 @@
     arm();
   })();
 
+  /* ---------- ヒーローの業種切替（写真が2枚以上ある .hero-quiet だけで動く） ----------
+     一次産業の写真をラベル付きでクロスフェードする。reduce 指定時は1枚目で固定。 */
+  (function () {
+    var slides = document.querySelectorAll('.hero-bg .hero-slide');
+    if (slides.length < 2) return;
+    var captions = document.querySelectorAll('.hero-captions [data-slide]');
+    var INTERVAL_MS = 7000;
+    var TICK_MS = 100;
+    var current = 0;
+    var elapsed = 0;
+
+    function show(index) {
+      current = index;
+      elapsed = 0;
+      Array.prototype.forEach.call(slides, function (img, i) {
+        img.classList.toggle('is-active', i === index);
+      });
+      Array.prototype.forEach.call(captions, function (btn, i) {
+        btn.setAttribute('aria-pressed', i === index ? 'true' : 'false');
+        btn.style.setProperty('--cap-progress', '0%');
+      });
+    }
+
+    Array.prototype.forEach.call(captions, function (btn) {
+      btn.addEventListener('click', function () {
+        show(Number(btn.getAttribute('data-slide')) || 0);
+      });
+    });
+
+    show(0);
+    if (reduce) return;
+    /* 進行線を伸ばしつつ、間隔が満ちたら次へ。クリックで切り替えた時は show() が elapsed を戻す */
+    setInterval(function () {
+      elapsed += TICK_MS;
+      var active = captions[current];
+      if (active) active.style.setProperty('--cap-progress', Math.min(100, elapsed / INTERVAL_MS * 100) + '%');
+      if (elapsed >= INTERVAL_MS) show((current + 1) % slides.length);
+    }, TICK_MS);
+  })();
+
   var targets = document.querySelectorAll(
     '.section-head, .service-card, .spot-card, .field-card, .plan, .tier, .ms-item, .cond-box, .opt-row, .cta-card, .faq-item, .flow-item, .tl-item, .option-wrap'
   );

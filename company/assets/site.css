@@ -905,6 +905,34 @@ input,select,textarea,.field input,.field select,.field textarea{border-radius:0
 .badge-small{font-family:var(--font-mono);font-size:12px;opacity:.85;margin-top:2px}
 .hero .chip{border-radius:0;background:transparent;border:1px solid rgba(255,255,255,.6);font-family:var(--font-mono);font-size:11px;letter-spacing:.14em;padding:5px 10px}
 /* 下層ページの hero（写真＋左下に文字）は低めに */
-.hero:not(.ls){min-height:0;padding:90px 0 54px}
-@media (max-width:767px){.hero:not(.ls){padding:64px 0 40px}}
-.hero:not(.ls) .hero-bg::after{background:linear-gradient(180deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.34) 50%,rgba(0,0,0,.7) 100%)}
+.hero:not(.ls):not(.hero-quiet){min-height:0;padding:90px 0 54px}
+@media (max-width:767px){.hero:not(.ls):not(.hero-quiet){padding:64px 0 40px}}
+.hero:not(.ls):not(.hero-quiet) .hero-bg::after{background:linear-gradient(180deg,rgba(0,0,0,.22) 0%,rgba(0,0,0,.34) 50%,rgba(0,0,0,.7) 100%)}
+
+/* Instagram運用代行ページのヒーロー（旧トップ由来）: 生成り色を白に、業種キャプションはそのまま */
+.hero-quiet h1,.hero-quiet .hero-sub,.hero-quiet .lead{color:#fff}
+.hero-quiet .hero-sub{color:rgba(255,255,255,.92)}
+.hero-quiet .lead{color:rgba(255,255,255,.85)}
+.hero-captions button{color:rgba(255,255,255,.55)}
+.hero-captions button:hover,.hero-captions button[aria-pressed="true"]{color:#fff}
+.hero-captions button::before{background:rgba(255,255,255,.3)}
+.hero-captions button[aria-pressed="true"]::before{background:linear-gradient(90deg,#fff var(--cap-progress,0%),rgba(255,255,255,.3) var(--cap-progress,0%))}
+.hero-captions{border-top-color:rgba(255,255,255,.24)}
+.news-bar{background:#fff;border-color:var(--line)}
+.news-chip{border-radius:0;background:#333;color:#fff}
+
+/* ---------- 制作実績（ホームページ制作ページ） ---------- */
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px;margin:0;padding:0;list-style:none}
+.work-card{min-width:0}
+.work-link{display:block;color:var(--ink);text-decoration:none}
+.work-shot{margin:0;border:1px solid var(--line);background:#fff;overflow:hidden}
+.work-shot img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top;transition:transform .5s ease}
+.work-link:hover .work-shot img{transform:scale(1.02)}
+.work-title{margin:12px 0 2px;font-size:15px;font-weight:700;line-height:1.5}
+.work-meta{margin:0 0 6px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:#424242;text-transform:uppercase}
+.work-desc{margin:0 0 8px;font-size:13px;line-height:1.75;color:#424242}
+.work-link .text-link{font-size:13px}
+.work-link:hover .text-link{text-decoration:underline;text-underline-offset:3px}
+.work-link:focus-visible{outline:2px solid #333;outline-offset:4px}
+@media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:599px){.works-grid{grid-template-columns:1fr}}
