@@ -1,5 +1,4 @@
-/* 下層ページ共通のふるまい。
-   トップ（v2.html）は同じ処理をインラインで持っているので、このファイルは読み込まない。
+/* 全ページ共通のふるまい（トップ v3.html も下層も、このファイル1本）。
    ここに切り出したのは、断片ファイルに書き忘れるとスマホでナビが永久に開かなくなるため。 */
 (function () {
   'use strict';
@@ -23,7 +22,7 @@
       link.addEventListener('click', function () { setMenu(false); });
     });
     document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') setMenu(false);
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setMenu(false); toggle.focus(); }
     });
   }
 
@@ -140,7 +139,8 @@
   }
 
   /* ---------- 動き（トップと同じ見え方に揃える） ---------- */
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduceMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reduce = reduceMQ.matches;
   var hasIO = 'IntersectionObserver' in window;
 
   var hero = document.querySelector('.hero');
@@ -154,44 +154,106 @@
     setTimeout(markReady, 400); /* 描画が止まっている環境への保険 */
   }
 
-  /* ---------- ヒーローの業種切替（トップのみ。写真が2枚以上あるときだけ動く） ----------
-     一次産業の写真をラベル付きでクロスフェードする。reduce 指定時は1枚目で固定。 */
+  /* ---------- トップのスライダー ----------
+     写真が 5 秒ごとに切り替わり、下端の列がそれに追従する。
+     PC: 列にマウスを載せると写真が切り替わる。列自体はリンクで、押すとそのページへ。
+     1024px 以下: 横スライド。スワイプと左下の線で切替。
+     マウスを載せている間・フォーカス中・タブが隠れている間は送らない。reduce 指定時は自動送りしない。 */
   (function () {
-    var slides = document.querySelectorAll('.hero-bg .hero-slide');
+    var root = document.querySelector('.ls');
+    if (!root) return;
+    var slides = root.querySelectorAll('.ls-slide');
+    var thumbs = root.querySelectorAll('.ls-thumb');
+    var dots = root.querySelectorAll('.ls-dots button');
+    var live = root.querySelector('[data-ls-live]');
     if (slides.length < 2) return;
-    var captions = document.querySelectorAll('.hero-captions [data-slide]');
-    var INTERVAL_MS = 7000;
-    var TICK_MS = 100;
-    var current = 0;
-    var elapsed = 0;
 
-    function show(index) {
-      current = index;
-      elapsed = 0;
-      Array.prototype.forEach.call(slides, function (img, i) {
-        img.classList.toggle('is-active', i === index);
-      });
-      Array.prototype.forEach.call(captions, function (btn, i) {
-        btn.setAttribute('aria-pressed', i === index ? 'true' : 'false');
-        btn.style.setProperty('--cap-progress', '0%');
-      });
+    var INTERVAL_MS = 5000;
+    var LEAVE_MS = 1000;
+    var timer = null;
+    var current = 0;
+    var held = false;
+    var isNarrow = function () { return window.innerWidth <= 1024; };
+
+    function arm() {
+      clearTimeout(timer);
+      if (reduce) return;
+      timer = setTimeout(function () {
+        if (held || document.hidden) { arm(); return; }
+        show(current + 1);
+      }, INTERVAL_MS);
     }
 
-    Array.prototype.forEach.call(captions, function (btn) {
-      btn.addEventListener('click', function () {
-        show(Number(btn.getAttribute('data-slide')) || 0);
+    function show(index) {
+      var next = (index + slides.length) % slides.length;
+      var prev = slides[current];
+      if (next !== current) {
+        /* 退場中の写真は寄りを止めない（フェード中に縮んで見えるのを防ぐ）。スマホは左へ流す */
+        prev.classList.add('is-leaving', 'is-prev');
+        setTimeout(function () { prev.classList.remove('is-leaving'); }, LEAVE_MS);
+      }
+      current = next;
+      Array.prototype.forEach.call(slides, function (el, i) {
+        el.classList.toggle('is-active', i === next);
+        if (i !== next && el !== prev) el.classList.remove('is-prev');
+        el.setAttribute('aria-hidden', i === next ? 'false' : 'true');
+        var link = el.querySelector('.ls-link');
+        if (link) link.tabIndex = i === next ? 0 : -1; /* 見えていない写真のリンクに Tab で止まらない */
       });
+      Array.prototype.forEach.call(thumbs, function (el, i) { el.classList.toggle('is-active', i === next); });
+      Array.prototype.forEach.call(dots, function (el, i) {
+        el.classList.toggle('is-active', i === next);
+        if (i === next) el.setAttribute('aria-current', 'true'); else el.removeAttribute('aria-current');
+      });
+      if (live) live.textContent = slides[next].getAttribute('aria-label') || '';
+      var after = slides[(next + 1) % slides.length].querySelector('img');
+      if (after && after.loading === 'lazy') after.loading = 'eager';
+      arm();
+    }
+
+    /* PC: 列にマウスを載せると切替。フォーカスでも同じ */
+    Array.prototype.forEach.call(thumbs, function (t, i) {
+      t.addEventListener('mouseenter', function () { if (!isNarrow()) show(i); });
+      t.addEventListener('focusin', function () { if (!isNarrow()) show(i); });
+    });
+    Array.prototype.forEach.call(dots, function (d, i) {
+      d.addEventListener('click', function () { show(i); });
     });
 
-    show(0);
-    if (reduce) return;
-    /* 進行線を伸ばしつつ、間隔が満ちたら次へ。クリックで切り替えた時は show() が elapsed を戻す */
-    setInterval(function () {
-      elapsed += TICK_MS;
-      var active = captions[current];
-      if (active) active.style.setProperty('--cap-progress', Math.min(100, elapsed / INTERVAL_MS * 100) + '%');
-      if (elapsed >= INTERVAL_MS) show((current + 1) % slides.length);
-    }, TICK_MS);
+    /* 載せている間・フォーカス中は送らない（WCAG 2.2.2 の一時停止） */
+    root.addEventListener('mouseenter', function () { held = true; });
+    root.addEventListener('mouseleave', function () { held = false; });
+    root.addEventListener('focusin', function () { held = true; });
+    root.addEventListener('focusout', function (e) { if (!root.contains(e.relatedTarget)) held = false; });
+
+    /* スワイプ（1024px 以下） */
+    var touchX = null;
+    root.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; held = true; }, { passive: true });
+    root.addEventListener('touchend', function (e) {
+      held = false;
+      if (touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      touchX = null;
+      if (Math.abs(dx) < 40) return;
+      show(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    /* キーボード（← →） */
+    root.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+      if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+    });
+
+    if (reduceMQ.addEventListener) {
+      reduceMQ.addEventListener('change', function (e) { reduce = e.matches; if (reduce) clearTimeout(timer); else arm(); });
+    }
+
+    Array.prototype.forEach.call(slides, function (el, i) {
+      el.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
+      var link = el.querySelector('.ls-link');
+      if (link) link.tabIndex = i === 0 ? 0 : -1;
+    });
+    arm();
   })();
 
   var targets = document.querySelectorAll(
@@ -222,8 +284,9 @@
 
   /* 問い合わせ先はページごとに違う（トップは #contact、下層は ../../index.html#contact）。
      ヘッダーのお問い合わせボタンから同じ行き先を借りる。 */
-  var headerContact = document.querySelector('.header-actions a[href*="#contact"]');
+  var headerContact = document.querySelector('.site-header [data-contact]') || document.querySelector('.header-actions a[href*="#contact"]');
   var contactHref = headerContact ? headerContact.getAttribute('href') : '#contact';
+  var isTop = Boolean(document.querySelector('main.page-top'));
 
   var cta = document.createElement('div');
   cta.className = 'sticky-cta';
@@ -232,15 +295,17 @@
     '<p>まずは30分、現状を聞かせてください<small>相談だけでも歓迎です。2営業日以内にご返信します。</small></p>' +
     '<a class="btn btn-fill" href="' + contactHref + '">無料で相談する<span class="arrow" aria-hidden="true">→</span></a>' +
     '</div>';
-  document.body.appendChild(cta);
+  if (!isTop) document.body.appendChild(cta); /* トップは追従バーを出さない（1画面構成のため） */
   var contactSec = document.getElementById('contact') || document.getElementById('cta');
+  var footerEl = document.querySelector('.site-footer');
 
   function applyScrollState() {
     var y = window.scrollY || document.documentElement.scrollTop;
     if (header) header.classList.toggle('is-scrolled', y > 8);
     var passedHero = y > window.innerHeight * 0.8;
     var atContact = contactSec && contactSec.getBoundingClientRect().top < window.innerHeight;
-    cta.classList.toggle('is-on', passedHero && !atContact);
+    var atFooter = footerEl && footerEl.getBoundingClientRect().top < window.innerHeight;
+    cta.classList.toggle('is-on', passedHero && !atContact && !atFooter);
   }
   /* 時間で間引く。rAFに任せると描画が止まった環境で二度と動かなくなる */
   var lastRun = 0, queued = null;
