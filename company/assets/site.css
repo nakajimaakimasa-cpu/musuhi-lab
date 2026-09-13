@@ -924,7 +924,7 @@ input,select,textarea,.field input,.field select,.field textarea{border-radius:0
 .news-chip{border-radius:0;background:#333;color:#fff}
 
 /* ---------- 制作実績（ホームページ制作ページ） ---------- */
-.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 24px;margin:0;padding:0;list-style:none}
+.works-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 28px;margin:0;padding:0;list-style:none}
 .work-card{min-width:0}
 .work-link{display:block;color:var(--ink);text-decoration:none}
 .work-shot{margin:0;border:1px solid var(--line);background:#fff;overflow:hidden}
@@ -936,5 +936,4 @@ input,select,textarea,.field input,.field select,.field textarea{border-radius:0
 .work-link .text-link{font-size:13px}
 .work-link:hover .text-link{text-decoration:underline;text-underline-offset:3px}
 .work-link:focus-visible{outline:2px solid #333;outline-offset:4px}
-@media (max-width:1023px){.works-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:599px){.works-grid{grid-template-columns:1fr}}
